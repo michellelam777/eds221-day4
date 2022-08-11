@@ -5,4 +5,91 @@ format: html
 editor: visual
 ---
 
-### 
+```{r}
+library(tidyverse)
+```
+
+### Intro to functions
+
+Make a function to double the user input
+
+```{r}
+double_this <- function(my_value) {
+  print(2 * my_value)
+}
+
+# can specify argument name or just use the order that they appear in your function
+# recommended to specify argument name before value 
+double_this(my_value = 200)
+double_this(200)
+
+# can use the function on a vector
+double_this(c(1, 2, 10, 100, 175))
+
+```
+
+Your turn: Write a function that asks for a user's NAME and age, and returns an exclamation, like "I'm \[NAME\], and I am \[age\] years old."
+
+```{r}
+name_age_statement <- function(your_name, your_age) {
+  print(paste("I'm", your_name, "and I am", your_age, "years old."))
+}
+
+name_age_statement(your_name = "Michelle", your_age = 27)
+```
+
+### Function with conditional
+
+```{r}
+convert_animal_age <- function(animal, human_age) {
+  if (animal == "dog") {
+    print(human_age * 7)
+  } else if (animal == "goat") {
+    print(human_age * 4.7)
+  } else {
+    print("Please enter dog or goat for animal.")
+  }
+}
+
+convert_animal_age(animal = "dog", human_age = 12)
+convert_animal_age(animal = "goat", human_age = 5)
+convert_animal_age(animal = "pika", human_age = 2)
+```
+
+### Function pulling info from a data frame
+
+```{r}
+# Make a data frame
+dog_choice <- tribble(
+  ~dog_name, ~food,
+  "Khora", "everything",
+  "Teddy", "salmon",
+  "Waffle", "pancakes",
+  "Banjo", "chicken"
+)
+
+# Given dogs name pull info from dog_choice data frame to output a statement referencing their favorite food
+# Filter function only keep rows in dog_choice data frame where the value int he dog_name column = the name input in the function
+dog_menu <- function(name) {
+  my_sub <- filter(dog_choice, dog_name == name)
+  print(paste("My name is", my_sub$dog_name, "and my favorite food is", my_sub$food))
+}
+
+dog_menu(name = "Waffle")
+```
+
+### Functions meet for loops
+
+```{r}
+means_over_columns <- function(df) {
+  for(i in seq_along(df)) {
+    col_mean <- mean(df[[i]], na.rm = TRUE)
+    column_name <- colnames(df[i])
+    print(paste("The mean value of", column_name, "is", col_mean))
+  }
+}
+
+means_over_columns(df = mtcars)
+
+means_over_columns(df = faithful)
+```
