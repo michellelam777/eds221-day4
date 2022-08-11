@@ -93,3 +93,50 @@ means_over_columns(df = mtcars)
 
 means_over_columns(df = faithful)
 ```
+
+### Nested loop with matrix output
+
+```{r}
+apples <- c(1, 2, 3, 4)
+price <- c(7, 10, 25)
+
+fruit_out <- matrix(nrow = length(price), ncol = length(apples))
+
+for (i in seq_along(apples)) {
+  for (j in seq_along (price)) {
+    total_cost <- price[j] * apples[i]
+    fruit_out[j, i] <- total_cost
+  }
+}
+
+fruit_out
+
+# Make up a nested loop 
+number_drink <- c(1, 2, 3, 4, 5)
+price <- c(10, 5, 8)
+
+drink_price <- matrix(nrow = length(price), ncol = length(number_drink))
+
+for (i in seq_along(number_drink)) {
+  for(j in seq_along(price)) {
+    drink_cost <- price[j] * number_drink[i]
+    drink_price[j, i] <- drink_cost
+  }
+}
+drink_price
+
+# Another example
+clothing <- c("shirt", "pants", "shoes")
+color <- c("purple", "red", "blue", "white")
+
+our_clothes <- matrix(nrow = length(color), ncol = length(clothing))
+
+for (i in seq_along(clothing)) {
+  for (j in seq_along(color)) {
+    clothing_details <- paste(color[j], clothing[i])
+    our_clothes[j,i] <- clothing_details
+  }
+}
+
+our_clothes
+```
