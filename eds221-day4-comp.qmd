@@ -141,7 +141,7 @@ for (i in seq_along(clothing)) {
 our_clothes
 ```
 
-### Logistic growth
+###  Logistic growth
 
 Modeling a population over time and varying growth rate
 
